@@ -339,6 +339,9 @@ public class ClientCustActionForm extends CustomerActionForm implements Question
             checkForMandatoryFields(EntityType.CLIENT.getValue(), errors, request);
             validateCustomFieldsForCustomers(request, errors);
             validatePicture(request, errors);
+            //*** ismail ***
+            validategovernmentId(errors, resources);
+            //*** fin ***
         }
         if (method.equals(Methods.preview.toString()) && ClientConstants.INPUT_MFI_INFO.equals(input)) {
             validateFormedByPersonnel(errors);
@@ -477,6 +480,19 @@ public class ClientCustActionForm extends CustomerActionForm implements Question
                     resources.getString("Customer.SpouseLastName")));
         }
     }
+
+    //*** ismail (controle de validation sur taille CIN) ***
+    private void validategovernmentId(ActionErrors errors, ResourceBundle resources){
+        String cin = getGovernmentId();
+        if( (cin.length() < 8 ) || (cin.length() > 8 ))
+        {
+             errors.add(CustomerConstants.GovernmentId, new ActionMessage(CustomerConstants.ERRORS_MANDATORY_CIN,
+                     CustomerConstants.GovernmentId));
+        }
+
+    }
+    //*** fin ***
+
 
     void validateDateOfBirth(ActionErrors errors) {
         validateDateOfBirth(errors, null);
