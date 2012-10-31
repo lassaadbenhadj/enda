@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+    <class name="org.mifos.application.meeting.business.MeetingRecurrenceEntity" table="recur_on_day">
+        <id name="detailsId" column="recur_on_day_id" type="integer" access="field">
+            <generator class="native" />
+        </id>
+        <version name="versionNo" column="version_no" type="integer" unsaved-value="null" />
+
+        <property name="dayNumber" column="day_number" type="short" />
+        <many-to-one name="meetingDetails" column="details_id"
+            class="org.mifos.application.meeting.business.MeetingDetailsEntity" insert="true" update="true" unique="true"
+            lazy="false" access="field" />
+        <property name="weekDay" column="days" type="org.mifos.application.meeting.util.helpers.WeekDayUserType" />
+        <property name="rankOfDays" column="rank_of_days" type="org.mifos.application.meeting.util.helpers.RankOfDayUserType" />
+    </class>
+</hibernate-mapping>

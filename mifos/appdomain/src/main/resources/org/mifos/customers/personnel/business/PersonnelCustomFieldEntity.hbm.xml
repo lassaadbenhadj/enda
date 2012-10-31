@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+    <class name="org.mifos.customers.personnel.business.PersonnelCustomFieldEntity" table="personnel_custom_field">
+        <id name="personnelCustomFieldId" column="personnel_custom_field_id" type="integer" access="field">
+            <generator class="native" />
+        </id>
+        <property name="fieldId" column="field_id" not-null="true" access="field" />
+        <property name="fieldValue" column="field_value" />
+        <many-to-one name="personnel" column="personnel_id" class="org.mifos.customers.personnel.business.PersonnelBO"  cascade="none" insert="true" update="true" unique="true" access="field"/>
+    </class>
+</hibernate-mapping>

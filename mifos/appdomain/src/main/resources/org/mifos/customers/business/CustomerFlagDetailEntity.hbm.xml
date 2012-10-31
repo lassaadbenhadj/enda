@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+
+<hibernate-mapping>
+    <class
+        name="org.mifos.customers.business.CustomerFlagDetailEntity"
+        table="customer_flag_detail">
+        <id name="customerFlagId" column="customer_flag_id"
+            type="integer" access="field">
+            <generator class="native"/>
+        </id>
+          <property name="createdBy" column="created_by"  />
+          <property name="createdDate" column="created_date"  />
+          <many-to-one name="statusFlag" column="flag_id"
+              class="org.mifos.customers.business.CustomerStatusFlagEntity"
+              insert="true" update="false" access="field"/>
+       </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+
+    <class name="org.mifos.customers.checklist.business.CheckListDetailEntity" table="checklist_detail">
+        <id name="detailId" column="detail_id" type="integer" access="field">
+            <generator class="native"/>
+        </id>
+
+        <property name="detailText" column="detail_text" type="string" />
+        <property name="answerType" column="answer_type" type="short"  not-null="true" />
+        <many-to-one name="supportedLocales" column="locale_id"
+            class="org.mifos.application.master.business.SupportedLocalesEntity"
+            />
+        <many-to-one name="checkListBO" column="checklist_id"
+            class="org.mifos.customers.checklist.business.CheckListBO"
+            access="field" cascade="none" insert="true" update="true" />
+
+    </class>
+
+</hibernate-mapping>

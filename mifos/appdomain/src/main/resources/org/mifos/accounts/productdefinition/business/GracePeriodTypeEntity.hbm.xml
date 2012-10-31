@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+
+    <class name="org.mifos.accounts.productdefinition.business.GracePeriodTypeEntity" table="grace_period_type">
+        <id name="id" column="grace_period_type_id">
+            <generator class="native"/>
+        </id>
+         <many-to-one name="lookUpValue" class="org.mifos.application.master.business.LookUpValueEntity" column="lookup_id" insert="true" update="false"/>
+    </class>
+
+    <query name="findGracePeriodTypeById">
+        <![CDATA[from GracePeriodTypeEntity i where i.id=:ID]]>
+    </query>
+</hibernate-mapping>

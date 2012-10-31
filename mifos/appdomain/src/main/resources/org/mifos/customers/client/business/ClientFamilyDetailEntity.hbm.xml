@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+
+    <class name="org.mifos.customers.client.business.ClientFamilyDetailEntity"
+        table="customer_family_detail">
+        <id name="customerFamilyId" column="customer_family_id"
+            type="integer" access="field">
+            <generator class="native"/>
+        </id>
+        <property name="relationship" column="relationship" type="short" />
+        <property name="gender" column="gender" type="short"/>
+        <property name="dateOfBirth" column="date_of_birth" type="date" />
+        <property name="livingStatus" column="living_status" type="short" />
+        <many-to-one name="client" column="customer_id" class="org.mifos.customers.client.business.ClientBO" insert="true" update="true"  access="field"/>
+        <many-to-one name="clientName" column="customer_name_id" class="org.mifos.customers.client.business.ClientNameDetailEntity" insert="true" update="true"  access="field"/>
+    </class>
+
+</hibernate-mapping>

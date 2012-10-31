@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <import resource="classpath:META-INF/spring/QuestionnaireContext.xml"/>
+    <import resource="classpath:META-INF/spring/CashFlowContext.xml"/>
+
+    <bean id="testDatabase" class="org.mifos.framework.persistence.TestDatabase">
+        <property name="integrationDataSource" ref="integrationDataSource" />
+    </bean>
+
+    <bean id="integrationDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${integration.database.driver}" />
+        <property name="url"
+            value="jdbc:mysql://${integration.database.host}:${integration.database.port}/${integration.database}?${integration.database.params.spring}" />
+        <property name="username" value="${integration.database.user}" />
+        <property name="password" value="${integration.database.password}" />
+    </bean>
+
+    <bean id="databaseCleaner" class="org.mifos.test.framework.util.DatabaseCleaner">
+        <constructor-arg ref="integrationDataSource" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="integrationDataSource" />
+    </bean>
+
+    <bean id="databaseTestUtils" class="org.mifos.test.framework.util.DatabaseTestUtils" />
+</beans>

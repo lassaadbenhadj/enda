@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <var name="questionGroupDetails" class="org.mifos.platform.questionnaire.service.QuestionGroupDetails" />
+
+    <on-start>
+        <evaluate expression="questionnaireServiceFacade.getQuestionGroups(requestParameters.event, requestParameters.source)"
+                result="questionGroupDetails.details"/>
+        <evaluate expression="questionnaireServiceFacade.getEventSourceId(requestParameters.event, requestParameters.source)"
+                result="flowScope.questionGroupDetails.eventSourceId"/>
+        <set name="flowScope.questionGroupDetails.creatorId" value="requestParameters.creatorId" type="int"/>
+        <set name="flowScope.questionGroupDetails.entityId" value="requestParameters.entityId" type="int"/>
+        <set name="flowScope.backPageUrl" value="requestParameters.backPageUrl" type="string"/>
+    </on-start>
+
+    <view-state id="selectQuestionnaire">
+        <transition on="selectQuestionnaire" to="recordSelection"/>
+        <transition on="cancel" to="viewClientDetails" bind="false" history="discard"/>
+    </view-state>
+
+    <action-state id="recordSelection">
+        <set name="flowScope.selectedQuestionnaireIndex" value="requestParameters.questionGroupId" type="int"></set>
+        <transition  to="questionnaire"/>
+    </action-state>
+
+    <view-state id="questionnaire" model="questionGroupDetails">
+        <transition on="saveQuestionnaire" to="saveQuestionnaire"/>
+        <transition on="cancel" to="viewClientDetails" bind="false" history="discard"/>
+    </view-state>
+
+    <action-state id="saveQuestionnaire">
+        <evaluate expression="questionGroupController.saveQuestionnaire(questionGroupDetails, flowScope.selectedQuestionnaireIndex, flowRequestContext)"/>
+        <transition on="success" to="viewClientDetails"/>
+        <transition on="failure" to="questionnaire"/>
+    </action-state>
+
+    <end-state id="viewClientDetails" view="externalRedirect:contextRelative:/${flowScope.backPageUrl}" />
+
+</flow>

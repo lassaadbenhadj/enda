@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+
+    <class name="org.mifos.application.meeting.business.RecurrenceTypeEntity" table="recurrence_type">
+        <id name="recurrenceId" column="recurrence_id" type="short" access="field">
+            <generator class="native"/>
+        </id>
+         <property name="recurrenceName" column="recurrence_name" type="string" access="field"/>
+         <property name="description" column="description" type="string" access="field"/>
+
+    </class>
+    <query name="meeting.fetchAllReccurenceTypes">
+        <![CDATA[from org.mifos.application.meeting.business.RecurrenceTypeEntity]]>
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+
+    <class name="org.mifos.accounts.productdefinition.business.SavingsTypeEntity" table="savings_type">
+        <id name="id" column="savings_type_id">
+            <generator class="native" />
+        </id>
+
+        <many-to-one name="lookUpValue" column="lookup_id" class="org.mifos.application.master.business.LookUpValueEntity" cascade="none" update="false" unique="true" />
+    </class>
+</hibernate-mapping>

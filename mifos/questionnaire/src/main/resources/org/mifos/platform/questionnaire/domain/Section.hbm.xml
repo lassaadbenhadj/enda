@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="org.mifos.platform.questionnaire.domain.Section" table="sections">
+        <id name="id" column="ID" type="integer" unsaved-value="0" access="field">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" access="field"/>
+        <property name="sequenceNumber" column="sequence_number" access="field" insert="false" update="false"/>
+        <bag name="questions" lazy="false" inverse="true" cascade="save-update" order-by="sequence_number">
+            <key column="section_id" not-null="true"/>
+            <one-to-many class="org.mifos.platform.questionnaire.domain.SectionQuestion"/>
+        </bag>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+6 rows were read:
+
+2 rows contained no errors and will be imported
+0 rows will be ignored
+4 rows contained errors and were not imported
+Total amount of transactions imported: 2095.0
+Total amount of disbursements imported: 0.0
+Total amount of transactions with error: 26710.0
+
+
+The following row(s) contain errors and will not be imported: 
+ 
+Row <25> error - Y29DW127 - Client with mobile number 0715575007 was not found 
+Row <26> error - Y28HL873 - Client with mobile number 0711821509 was not found 
+Row <27> error - Y28GK611 - No valid accounts found with this transaction
+Row <28> error - Y28GK612 - Date does not begin with expected format (YYYY-MM-DD)

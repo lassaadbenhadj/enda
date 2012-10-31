@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+
+
+<hibernate-mapping>
+
+    <class name="org.mifos.customers.business.CustomerCustomFieldEntity" table="customer_custom_field">
+        <id name="customFieldId" column="customer_customfield_id"  access="field">
+            <generator class="native"/>
+        </id>
+        <property name="fieldId" column="field_id"  access="field"/>
+          <property name="fieldValue" column="field_value"  />
+           <many-to-one name="customer" column="customer_id" class="org.mifos.customers.business.CustomerBO"  insert="true" update="false" access="field"/>
+    </class>
+</hibernate-mapping>
