@@ -218,11 +218,13 @@ public class LoanBusinessService implements BusinessService {
     }
 
     private boolean dailyInterestRatesApplicable(LoanScheduleGenerationDto loanScheduleGenerationDto, LoanBO loanBO) {
-        return loanScheduleGenerationDto.isVariableInstallmentsAllowed() || loanBO.isDecliningBalanceInterestRecalculation();
+        //return loanScheduleGenerationDto.isVariableInstallmentsAllowed() || loanBO.isDecliningBalanceInterestRecalculation();
+        return false;
     }
 
     public void applyDailyInterestRates(LoanScheduleGenerationDto loanScheduleGenerationDto) {
         Double dailyInterestFactor = loanScheduleGenerationDto.getInterestRate() / (AccountingRules.getNumberOfInterestDays() * 100d);
+        dailyInterestFactor=loanScheduleGenerationDto.getInterestRate()/(12* 100);
         Money principalOutstanding = loanScheduleGenerationDto.getLoanAmountValue();
         Money runningPrincipal = new Money(loanScheduleGenerationDto.getLoanAmountValue().getCurrency());
         Date initialDueDate = loanScheduleGenerationDto.getDisbursementDate();
@@ -231,6 +233,7 @@ public class LoanBusinessService implements BusinessService {
             RepaymentScheduleInstallment installment = loanScheduleGenerationDto.getInstallments().get(installmentIndex);
             Date currentDueDate = installment.getDueDateValue();
             long duration = DateUtils.getNumberOfDaysBetweenTwoDates(currentDueDate, initialDueDate);
+            duration=1;
             Money fees = installment.getFees();
             Money interest = computeInterestAmount(dailyInterestFactor, principalOutstanding, installment, duration);
             Money miscFee = installment.getMiscFees();
@@ -245,6 +248,7 @@ public class LoanBusinessService implements BusinessService {
 
         RepaymentScheduleInstallment lastInstallment = loanScheduleGenerationDto.getInstallments().get(installmentIndex);
         long duration = DateUtils.getNumberOfDaysBetweenTwoDates(lastInstallment.getDueDateValue(), initialDueDate);
+        duration=1;
         Money interest = computeInterestAmount(dailyInterestFactor, principalOutstanding, lastInstallment, duration);
         Money fees = lastInstallment.getFees();
         Money principal = loanScheduleGenerationDto.getLoanAmountValue().subtract(runningPrincipal);
@@ -324,7 +328,9 @@ public class LoanBusinessService implements BusinessService {
     public Errors computeExtraInterest(LoanBO loan, Date asOfDate) {
         Errors errors = new Errors();
         validateForComputeExtraInterestDate(loan, asOfDate, errors);
-        if (!errors.hasErrors()) scheduleCalculatorAdaptor.computeExtraInterest(loan, asOfDate);
+        if (!errors.hasErrors()) {
+            scheduleCalculatorAdaptor.computeExtraInterest(loan, asOfDate);
+        }
         return errors;
     }
 
