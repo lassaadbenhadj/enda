@@ -98,6 +98,10 @@ public class LoanDisbursementAction extends BaseAction {
         List<PaymentTypeEntity> paymentTypes = legacyAcceptedPaymentTypeDao.getAcceptedPaymentTypesForATransaction(uc.getLocaleId(), TrxnTypes.loan_disbursement.getValue());
         SessionUtils.setCollectionAttribute(MasterConstants.PAYMENT_TYPE, paymentTypes, request);
 
+        //ajout lbh
+        loanDisbursementActionForm.setPaymentModeOfPayment("1");
+        loanDisbursementActionForm.setPaymentTypeId("1");
+        //==<
         return mapping.findForward(Constants.LOAD_SUCCESS);
     }
 

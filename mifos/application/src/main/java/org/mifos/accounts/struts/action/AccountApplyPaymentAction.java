@@ -76,7 +76,7 @@ public class AccountApplyPaymentAction extends BaseAction {
         AccountApplyPaymentActionForm actionForm = (AccountApplyPaymentActionForm) form;
         actionForm.setReceiptDate(null);
         actionForm.setReceiptId(null);
-        actionForm.setPaymentTypeId(null);
+        actionForm.setPaymentTypeId("1");
         actionForm.setTransactionDate(DateUtils.makeDateAsSentFromBrowser());
 
         final AccountReferenceDto accountReferenceDto = new AccountReferenceDto(Integer.valueOf(actionForm.getAccountId()));

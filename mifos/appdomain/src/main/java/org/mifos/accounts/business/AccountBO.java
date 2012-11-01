@@ -953,6 +953,15 @@ public class AccountBO extends AbstractBusinessObject {
                         DateUtils.getCurrentDateWithoutTimeStamp())) {
             totalAmt = totalAmt.add(getDueAmount(nextInstallment));
         }
+        // ADDED by LBH
+        if (totalAmt.isZero()) {
+            if (nextInstallment != null
+                    && !nextInstallment.isPaid()
+                    && nextInstallment.getActionDate().compareTo(DateUtils.getCurrentDateWithoutTimeStamp()) > 0) {
+                totalAmt = totalAmt.add(getDueAmount(nextInstallment));
+            }
+        }
+        //<==
         return totalAmt;
     }
 
