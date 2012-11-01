@@ -1159,7 +1159,7 @@ public class LoanAccountAction extends AccountAppAction implements Questionnaire
                 MasterConstants.COLLATERAL_TYPES).getCustomValueListElements(), request);
         SessionUtils.setAttribute(AccountConstants.LAST_PAYMENT_ACTION, loanBusinessService.getLastPaymentAction(loanInformationDto.getAccountId()), request);
         SessionUtils.removeThenSetAttribute("loanInformationDto", loanInformationDto, request);
-
+        SessionUtils.setCollectionAttribute(RECENTACCOUNTACTIVITIES, loanInformationDto.getRecentAccountActivity(), request);
         request.setAttribute(CustomerConstants.SURVEY_KEY, loanInformationDto.getAccountSurveys());
         request.setAttribute(CustomerConstants.SURVEY_COUNT, loanInformationDto.getActiveSurveys());
         request.setAttribute(AccountConstants.SURVEY_KEY, loanInformationDto.getAccountSurveys());
