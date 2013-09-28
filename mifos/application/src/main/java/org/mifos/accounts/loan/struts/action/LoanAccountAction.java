@@ -365,7 +365,7 @@ public class LoanAccountAction extends AccountAppAction implements Questionnaire
         loanActionForm.setNoOfInstallments(getStringValue(eligibleNoOfInstall.getDefaultNoOfInstall()));
         loanActionForm.setInterestRate(getDoubleStringForInterest(loanProduct.getDefInterestRate()));
         loanActionForm.setIntDedDisbursement(getStringValue(loanProduct.isIntDedDisbursement()));
-        loanActionForm.setGracePeriodDuration(getStringValue(loanProduct.getGracePeriodDuration()));
+        loanActionForm.setGracePeriodDuration(0);
         loanActionForm.setDisbursementDate(DateUtils.getUserLocaleDate(getUserContext(request).getPreferredLocale(),
                 SessionUtils.getAttribute(PROPOSED_DISBURSAL_DATE, request).toString()));
 
